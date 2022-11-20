@@ -52,7 +52,6 @@ namespace ImageEdgeDetection
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
-           // ApplyFilter(false);
            if(pictureBoxResult.Image == null)
             {
                 resultBitmap = (Bitmap)pictureBoxPreview.Image;
@@ -93,13 +92,6 @@ namespace ImageEdgeDetection
             }
         }
 
-       
-
-        //private void NeighbourCountValueChangedEventHandler(object sender, EventArgs e)
-        //{
-        //    ApplyFilter(true);
-        //}
-
         private void listBoxYFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -122,8 +114,7 @@ namespace ImageEdgeDetection
 
         private void buttonApplyFilters_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+
             if (listBoxXFilter.SelectedItem.ToString().Length > 0 && listBoxYFilter.SelectedItem.ToString().Length > 0)
             {
                 filter(listBoxXFilter.SelectedItem.ToString(), listBoxYFilter.SelectedItem.ToString());
@@ -133,12 +124,6 @@ namespace ImageEdgeDetection
             {
                 labelErrors.Text = "2 filters must be selected";
             }
-            //}
-            //catch (Exception)
-            //{
-            //    labelErrors.Text = "2 filters must be selected (error)";
-            //}
-
         }
 
         public void ConvertToXYCoord(PictureBox pictureBoxelem)
@@ -163,7 +148,6 @@ namespace ImageEdgeDetection
                     Color pixelColor = Color.FromArgb(bitmapIMG.GetPixel(x, y).ToArgb());
                     if (pixelColor.Name != "ff000000" && pixelColor.Name != "0")
                     {
-                        //coord = coord + x.ToString() + "," + y.ToString() + "|";
                         newX = Convert.ToDouble(x);
                         newY = Convert.ToDouble(y);
                         int angle = 110;
@@ -172,17 +156,10 @@ namespace ImageEdgeDetection
                         newX = newX * Math.Cos(angle) - newY * Math.Sin(angle);
                         newY = newX * Math.Sin(angle) + newY * Math.Cos(angle);
 
-                        //Image.coord imgCoord = new Image.coord();
-                        //imgCoord.x = newX;
-                        //imgCoord.y = newY;
-                        //coorArray.Add(imgCoord);
                         coord = coord + newX.ToString() + "," + newY.ToString() + "|";
                     }
                 }
             }
-          //  textBoxData.Text = coord;
-
-
         }
 
         public double [,] getMatrix(string filter)
@@ -222,92 +199,7 @@ namespace ImageEdgeDetection
         {
             double[,] xFilterMatrix = getMatrix(xfilter);
             double[,] yFilterMatrix = getMatrix(yfilter);
-            /*switch (xfilter)
-            {
-                case "Laplacian3x3":
-                    xFilterMatrix = Matrix.Laplacian3x3;
-                    break;
-                case "Laplacian5x5":
-                    xFilterMatrix = Matrix.Laplacian5x5;
-                    break;
-                case "LaplacianOfGaussian":
-                    xFilterMatrix = Matrix.LaplacianOfGaussian;
-                    break;
-                case "Gaussian3x3":
-                    xFilterMatrix = Matrix.Gaussian3x3;
-                    break;
-                case "Gaussian5x5Type1":
-                    xFilterMatrix = Matrix.Gaussian5x5Type1;
-                    break;
-                case "Gaussian5x5Type2":
-                    xFilterMatrix = Matrix.Gaussian5x5Type2;
-                    break;
-                case "Sobel3x3Horizontal":
-                    xFilterMatrix = Matrix.Sobel3x3Horizontal;
-                    break;
-                case "Sobel3x3Vertical":
-                    xFilterMatrix = Matrix.Sobel3x3Vertical;
-                    break;
-                case "Prewitt3x3Horizontal":
-                    xFilterMatrix = Matrix.Prewitt3x3Horizontal;
-                    break;
-                case "Prewitt3x3Vertical":
-                    xFilterMatrix = Matrix.Prewitt3x3Vertical;
-                    break;
-                case "Kirsch3x3Horizontal":
-                    xFilterMatrix = Matrix.Kirsch3x3Horizontal;
-                    break;
-                case "Kirsch3x3Vertical":
-                    xFilterMatrix = Matrix.Kirsch3x3Vertical;
-                    break;
-                default:
-                    xFilterMatrix = Matrix.Laplacian3x3;
-                    break;
-            }
-
-            switch (yfilter)
-            {
-                case "Laplacian3x3":
-                    yFilterMatrix = Matrix.Laplacian3x3;
-                    break;
-                case "Laplacian5x5":
-                    yFilterMatrix = Matrix.Laplacian5x5;
-                    break;
-                case "LaplacianOfGaussian":
-                    yFilterMatrix = Matrix.LaplacianOfGaussian;
-                    break;
-                case "Gaussian3x3":
-                    yFilterMatrix = Matrix.Gaussian3x3;
-                    break;
-                case "Gaussian5x5Type1":
-                    yFilterMatrix = Matrix.Gaussian5x5Type1;
-                    break;
-                case "Gaussian5x5Type2":
-                    yFilterMatrix = Matrix.Gaussian5x5Type2;
-                    break;
-                case "Sobel3x3Horizontal":
-                    yFilterMatrix = Matrix.Sobel3x3Horizontal;
-                    break;
-                case "Sobel3x3Vertical":
-                    yFilterMatrix = Matrix.Sobel3x3Vertical;
-                    break;
-                case "Prewitt3x3Horizontal":
-                    yFilterMatrix = Matrix.Prewitt3x3Horizontal;
-                    break;
-                case "Prewitt3x3Vertical":
-                    yFilterMatrix = Matrix.Prewitt3x3Vertical;
-                    break;
-                case "Kirsch3x3Horizontal":
-                    yFilterMatrix = Matrix.Kirsch3x3Horizontal;
-                    break;
-                case "Kirsch3x3Vertical":
-                    yFilterMatrix = Matrix.Kirsch3x3Vertical;
-                    break;
-                default:
-                    yFilterMatrix =Matrix.Laplacian3x3;
-                    break;
-            }*/
-
+            
             if (pictureBoxPreview.Image.Size.Height > 0)
             {
                 Bitmap newbitmap = new Bitmap(pictureBoxPreview.Image);
@@ -324,14 +216,6 @@ namespace ImageEdgeDetection
                 double blue = 0.0;
                 double green = 0.0;
                 double red = 0.0;
-
-                //int filterWidth = filterMatrix.GetLength(1);
-                //int filterHeight = filterMatrix.GetLength(0);
-
-                //int filterOffset = (filterWidth - 1) / 2;
-                //int calcOffset = 0;
-
-                //int byteOffset = 0;
 
                 double blueX = 0.0;
                 double greenX = 0.0;
@@ -357,9 +241,6 @@ namespace ImageEdgeDetection
                         newbitmap.Width - filterOffset; offsetX++)
                     {
                         blueX = greenX = redX = blueY = greenY = redY = blueTotal = greenTotal = redTotal = 0;
-                        //blueY = greenY = redY = 0;
-
-                        //blueTotal = greenTotal = redTotal = 0.0;
 
                         byteOffset = offsetY *
                                      newbitmapData.Stride +
@@ -385,21 +266,10 @@ namespace ImageEdgeDetection
                             }
                         }
 
-                        //blueTotal = Math.Sqrt((blueX * blueX) + (blueY * blueY));
                         blueTotal = 0;
                         greenTotal = Math.Sqrt((greenX * greenX) + (greenY * greenY));
-                        //redTotal = Math.Sqrt((redX * redX) + (redY * redY));
                         redTotal = 0;
-                        /*if (blueTotal > 255)
-                        { blueTotal = 255; }
-                        else if (blueTotal < 0)
-                        { blueTotal = 0; }
-                        */
-                        /*if (greenTotal > 255)
-                        { greenTotal = 255; }
-                        else if (greenTotal < 0)
-                        { greenTotal = 0; }
-                        */
+
                         try
                         {
                             if (greenTotal < Convert.ToInt32(trackBarThreshold.Value))
@@ -417,12 +287,6 @@ namespace ImageEdgeDetection
                             throw;
                         }
 
-
-                        /*if (redTotal > 255)
-                        { redTotal = 255; }
-                        else if (redTotal < 0)
-                        { redTotal = 0; }
-                        */
                         resultbuff[byteOffset] = (byte)(blueTotal);
                         resultbuff[byteOffset + 1] = (byte)(greenTotal);
                         resultbuff[byteOffset + 2] = (byte)(redTotal);
@@ -462,7 +326,7 @@ namespace ImageEdgeDetection
 
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void btnNightFilter_Click(object sender, EventArgs e)
         {
             if(pictureBoxPreview.Image != null)
             {
@@ -473,7 +337,7 @@ namespace ImageEdgeDetection
                
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void btnPinkFilter_Click(object sender, EventArgs e)
         {
             if (pictureBoxPreview.Image != null)
             {
@@ -487,7 +351,7 @@ namespace ImageEdgeDetection
             }
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);
             IfFilters(false);
@@ -521,7 +385,7 @@ namespace ImageEdgeDetection
 
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void btnNoFilter_click(object sender, EventArgs e)
         {
             if (pictureBoxPreview.Image != null)
             {

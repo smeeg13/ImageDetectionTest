@@ -39,11 +39,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBoxResult = new System.Windows.Forms.PictureBox();
             this.labelErrors = new System.Windows.Forms.Label();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btnPinkFilter = new System.Windows.Forms.Button();
+            this.btnNightFilter = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.trackBarThreshold = new System.Windows.Forms.TrackBar();
-            this.button13 = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.btnNoFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResult)).BeginInit();
@@ -189,27 +189,27 @@
             this.labelErrors.TabIndex = 28;
             this.labelErrors.Click += new System.EventHandler(this.label3_Click);
             // 
-            // button21
+            // btnPinkFilter
             // 
-            this.button21.Location = new System.Drawing.Point(190, 688);
-            this.button21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(147, 57);
-            this.button21.TabIndex = 47;
-            this.button21.Text = "Mega Filter Pink";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
+            this.btnPinkFilter.Location = new System.Drawing.Point(190, 688);
+            this.btnPinkFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnPinkFilter.Name = "btnPinkFilter";
+            this.btnPinkFilter.Size = new System.Drawing.Size(147, 57);
+            this.btnPinkFilter.TabIndex = 47;
+            this.btnPinkFilter.Text = "Mega Filter Pink";
+            this.btnPinkFilter.UseVisualStyleBackColor = true;
+            this.btnPinkFilter.Click += new System.EventHandler(this.btnPinkFilter_Click);
             // 
-            // button10
+            // btnNightFilter
             // 
-            this.button10.Location = new System.Drawing.Point(190, 623);
-            this.button10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(147, 46);
-            this.button10.TabIndex = 46;
-            this.button10.Text = "Night Filter";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.btnNightFilter.Location = new System.Drawing.Point(190, 623);
+            this.btnNightFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnNightFilter.Name = "btnNightFilter";
+            this.btnNightFilter.Size = new System.Drawing.Size(147, 46);
+            this.btnNightFilter.TabIndex = 46;
+            this.btnNightFilter.Text = "Night Filter";
+            this.btnNightFilter.UseVisualStyleBackColor = true;
+            this.btnNightFilter.Click += new System.EventHandler(this.btnNightFilter_Click);
             // 
             // label6
             // 
@@ -234,16 +234,16 @@
             this.trackBarThreshold.Value = 100;
             this.trackBarThreshold.Scroll += new System.EventHandler(this.trackBarThreshold_Scroll);
             // 
-            // button13
+            // btnBack
             // 
-            this.button13.Location = new System.Drawing.Point(500, 628);
-            this.button13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(112, 35);
-            this.button13.TabIndex = 50;
-            this.button13.Text = "back";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.btnBack.Location = new System.Drawing.Point(500, 628);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(112, 35);
+            this.btnBack.TabIndex = 50;
+            this.btnBack.Text = "back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNoFilter
             // 
@@ -254,18 +254,18 @@
             this.btnNoFilter.TabIndex = 51;
             this.btnNoFilter.Text = "No Filter";
             this.btnNoFilter.UseVisualStyleBackColor = true;
-            this.btnNoFilter.Click += new System.EventHandler(this.button17_Click);
+            this.btnNoFilter.Click += new System.EventHandler(this.btnNoFilter_click);
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1356, 1036);
             this.Controls.Add(this.btnNoFilter);
-            this.Controls.Add(this.button13);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.trackBarThreshold);
-            this.Controls.Add(this.button21);
-            this.Controls.Add(this.button10);
+            this.Controls.Add(this.btnPinkFilter);
+            this.Controls.Add(this.btnNightFilter);
             this.Controls.Add(this.labelErrors);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBoxResult);
@@ -305,11 +305,11 @@
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.PictureBox pictureBoxResult;
         private System.Windows.Forms.Label labelErrors;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btnPinkFilter;
+        private System.Windows.Forms.Button btnNightFilter;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar trackBarThreshold;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNoFilter;
     }
 }

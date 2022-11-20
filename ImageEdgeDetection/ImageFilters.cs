@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace ImageEdgeDetection.Image.Testes
 {
-    public static class ImageFilters
+    public class ImageFilters
     {
                 //apply color filter at your own taste
         public static Bitmap ApplyFilter(Bitmap bmp, int alpha, int red, int blue, int green)
