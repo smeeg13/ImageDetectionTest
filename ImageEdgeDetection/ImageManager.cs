@@ -1,40 +1,26 @@
-﻿ /*
- * The Following Code was developed by Dewald Esterhuizen
- * View Documentation at: http://softwarebydefault.com
- * Licensed under Ms-PL 
-*/
+﻿using ImageEdgeDetection.Image.Testes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-using ImageEdgeDetection.Image.Testes;
 
 namespace ImageEdgeDetection
 {
-    public partial class MainForm : Form
+    public class ImageManager
     {
-        private ImageManager IM = null;
-        
-        public MainForm()
+        private Bitmap originalBitmap = null;
+        private Bitmap previewBitmap = null;
+        private Bitmap resultBitmap = null;
+        public double[,] matrix { get; set; }
+
+        public Bitmap openImage(int width)
         {
-            InitializeComponent();
-            IM = new ImageManager();
-            IfFilters(false);
-
-        }
-
-        private void btnOpenOriginal_Click(object sender, EventArgs e)
-        {
-            pictureBoxPreview.Image = IM.openImage(pictureBoxPreview.Width);
-
-            /*OpenFileDialog ofd = new OpenFileDialog();
+            OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select an image file.";
             ofd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
             ofd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
@@ -44,27 +30,23 @@ namespace ImageEdgeDetection
                 originalBitmap = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
                 streamReader.Close();
 
-                previewBitmap = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);
-                pictureBoxPreview.Image = previewBitmap;
+                return originalBitmap.CopyToSquareCanvas(width);
+            }
 
-                IfFilters(false);
-            }*/
-            IfFilters(false);
+            return null;
         }
 
-        private void btnSaveNewImage_Click(object sender, EventArgs e)
+        public void SaveImage(PictureBox result, PictureBox preview)
         {
-            IM.SaveImage(pictureBoxResult, pictureBoxPreview);
-            /*
-            if (pictureBoxResult.Image == null)
+            if (result.Image == null)
             {
-                resultBitmap = (Bitmap)pictureBoxPreview.Image;
+                resultBitmap = (Bitmap)preview.Image;
             }
             else
             {
-                resultBitmap = (Bitmap)pictureBoxResult.Image;
+                resultBitmap = (Bitmap)preview.Image;
             }
-           
+
             if (resultBitmap != null)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -93,51 +75,29 @@ namespace ImageEdgeDetection
 
                     resultBitmap = null;
                 }
-            }*/
+            }
         }
 
-        private void listBoxYFilter_SelectedIndexChanged(object sender, EventArgs e)
+        public void applyXY(ListBox listBoxXFilter, ListBox listBoxYFilter, PictureBox result, PictureBox preview, int value, Label error)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBoxXFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void buttonApplyFilters_Click(object sender, EventArgs e)
-        {
-            IM.applyXY(listBoxXFilter,listBoxYFilter,pictureBoxResult, pictureBoxPreview, Convert.ToInt32(trackBarThreshold.Value), labelErrors);
-            
-            /*if (listBoxXFilter.SelectedItem.ToString().Length > 0 && listBoxYFilter.SelectedItem.ToString().Length > 0)
+            if (listBoxXFilter.SelectedItem.ToString().Length > 0 && listBoxYFilter.SelectedItem.ToString().Length > 0)
             {
-                filter(listBoxXFilter.SelectedItem.ToString(), listBoxYFilter.SelectedItem.ToString());
-                ConvertToXYCoord(pictureBoxResult);
+                Filter(listBoxXFilter.SelectedItem.ToString(), listBoxYFilter.SelectedItem.ToString(), preview,  value, result, error);
+                ConvertToXYCoord(preview);
             }
             else
             {
-                labelErrors.Text = "2 filters must be selected";
-            }*/
+                error.Text = "2 filters must be selected";
+            }
         }
 
-        /*public void ConvertToXYCoord(PictureBox pictureBoxelem)
+        public void ConvertToXYCoord(PictureBox result)
         {
             string coord = "";
-            int width = pictureBoxelem.Image.Width;
-            int height = pictureBoxelem.Image.Height;
+            int width = result.Image.Width;
+            int height = result.Image.Height;
             System.Drawing.Size size = new System.Drawing.Size(width, height);
-            Bitmap bitmapIMG = new Bitmap(pictureBoxResult.Image, width, height);
+            Bitmap bitmapIMG = new Bitmap(result.Image, width, height);
 
             List<ImageEdgeDetection.coord> coorArray = new List<ImageEdgeDetection.coord>();
 
@@ -167,7 +127,7 @@ namespace ImageEdgeDetection
             }
         }
 
-        /*public double [,] getMatrix(string filter)
+        public double[,] GetMatrix(string filter)
         {
             switch (filter)
             {
@@ -198,17 +158,60 @@ namespace ImageEdgeDetection
                 default:
                     return Matrix.Laplacian3x3;
             }
+            /*switch (filter)
+            {
+                case "Laplacian3x3":
+                    matrix = Matrix.Laplacian3x3;
+                    break;
+                case "Laplacian5x5":
+                    matrix = Matrix.Laplacian5x5;
+                    break;
+                case "LaplacianOfGaussian":
+                    matrix = Matrix.LaplacianOfGaussian;
+                    break;
+                case "Gaussian3x3":
+                    matrix = Matrix.Gaussian3x3;
+                    break;
+                case "Gaussian5x5Type1":
+                    matrix = Matrix.Gaussian5x5Type1;
+                    break;
+                case "Gaussian5x5Type2":
+                    matrix = Matrix.Gaussian5x5Type2;
+                    break;
+                case "Sobel3x3Horizontal":
+                    matrix = Matrix.Sobel3x3Horizontal;
+                    break;
+                case "Sobel3x3Vertical":
+                    matrix = Matrix.Sobel3x3Vertical;
+                    break;
+                case "Prewitt3x3Horizontal":
+                    matrix = Matrix.Prewitt3x3Horizontal;
+                    break;
+                case "Prewitt3x3Vertical":
+                    matrix = Matrix.Prewitt3x3Vertical;
+                    break;
+                case "Kirsch3x3Horizontal":
+                    matrix = Matrix.Kirsch3x3Horizontal;
+                    break;
+                case "Kirsch3x3Vertical":
+                    matrix = Matrix.Kirsch3x3Vertical;
+                    break;
+                default:
+                    matrix = Matrix.Laplacian3x3;
+                    break;
+            }*/
         }
 
-        public void filter(string xfilter, string yfilter)
+        public void Filter(string xfilter, string yfilter, PictureBox preview, int value, PictureBox result, Label error)
         {
-            
-            double[,] xFilterMatrix = getMatrix(xfilter);
-            double[,] yFilterMatrix = getMatrix(yfilter);
-            
-            if (pictureBoxPreview.Image.Size.Height > 0)
+            //GetMatrix(xfilter);
+            double[,] xFilterMatrix = GetMatrix(xfilter);//matrix;
+            //GetMatrix(yfilter);
+            double[,] yFilterMatrix = GetMatrix(yfilter);//matrix;
+
+            if (preview.Image.Size.Height > 0)
             {
-                Bitmap newbitmap = new Bitmap(pictureBoxPreview.Image);
+                Bitmap newbitmap = new Bitmap(preview.Image);
                 BitmapData newbitmapData = new BitmapData();
                 newbitmapData = newbitmap.LockBits(new Rectangle(0, 0, newbitmap.Width, newbitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppPArgb);
 
@@ -261,7 +264,7 @@ namespace ImageEdgeDetection
                                 calcOffset = byteOffset +
                                              (filterX * 4) +
                                              (filterY * newbitmapData.Stride);
-                                var xCalcul = xFilterMatrix[filterY + filterOffset,filterX + filterOffset];
+                                var xCalcul = xFilterMatrix[filterY + filterOffset, filterX + filterOffset];
                                 var yCalcul = yFilterMatrix[filterY + filterOffset, filterX + filterOffset];
                                 blueX += (double)(pixelbuff[calcOffset]) * xCalcul;
                                 greenX += (double)(pixelbuff[calcOffset + 1]) * xCalcul;
@@ -278,7 +281,7 @@ namespace ImageEdgeDetection
 
                         try
                         {
-                            if (greenTotal < Convert.ToInt32(trackBarThreshold.Value))
+                            if (greenTotal < Convert.ToInt32(value))
                             {
                                 greenTotal = 0;
                             }
@@ -309,96 +312,45 @@ namespace ImageEdgeDetection
 
                 Marshal.Copy(resultbuff, 0, resultData.Scan0, resultbuff.Length);
                 resultbitmap.UnlockBits(resultData);
-                pictureBoxResult.Image = resultbitmap;
+                result.Image = resultbitmap;
             }
             else
             {
-                labelErrors.Text = "You must load an image";
+                error.Text = "You must load an image";
             }
-        }*/
-
-        private void picPreview_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        public void NightFilter(PictureBox pictureBoxPreview)
         {
-
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNightFilter_Click(object sender, EventArgs e)
-        {
-            IM.NightFilter(pictureBoxPreview);
-            /*if(pictureBoxPreview.Image != null)
+            if (pictureBoxPreview.Image != null)
             {
-                pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width); 
-                 pictureBoxPreview.Image = ImageFilters.ApplyFilter(new Bitmap(pictureBoxPreview.Image), 1, 1, 1, 25);*/
-            IfFilters(true);
-            //}
-               
+                pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);
+                pictureBoxPreview.Image = ImageFilters.ApplyFilter(new Bitmap(pictureBoxPreview.Image), 1, 1, 1, 25);
+            }
         }
 
-        private void btnPinkFilter_Click(object sender, EventArgs e)
+        public void NoFilter(PictureBox preview)
         {
-            IM.PinkFilter(pictureBoxPreview);
-            /*if (pictureBoxPreview.Image != null)
+    
+            if(preview.Image != null)
+                NormalPicture(preview);
+            
+        }
+
+        public void NormalPicture(PictureBox preview)
+        {
+            preview.Image = originalBitmap.CopyToSquareCanvas(preview.Width);
+        }
+
+        public void PinkFilter(PictureBox preview)
+        {
+            if (preview.Image != null)
             {
                 Color c = Color.Pink;
-                pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);
-
-                pictureBoxPreview.Image = ImageFilters.ApplyFilterMega(new Bitmap(pictureBoxPreview.Image), 230, 110, c);
-
-                */
-            IfFilters(true);
-            //}
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            IM.NormalPicture(pictureBoxPreview);
-            IfFilters(false);
-        }
-
-        private void trackBarThreshold_Scroll(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void IfFilters(Boolean isFiltered)
-        {
-            listBoxXFilter.Visible = isFiltered;
-            listBoxYFilter.Visible = isFiltered;
-            label4.Visible = isFiltered;
-            pictureBoxResult.Visible = isFiltered;
-            label1.Visible = isFiltered;
-            label2.Visible = isFiltered;
-            listBoxYFilter.Visible = isFiltered;
-            buttonApplyFilters.Visible = isFiltered;
-            trackBarThreshold.Visible = isFiltered;
-            label6.Visible = isFiltered;
-            pictureBoxResult.Image = null;
-
-        }
-
-        private void btnNoFilter_Click(object sender, EventArgs e)
-        {
-            IM.NoFilter(pictureBoxPreview);
-            /*if (pictureBoxPreview.Image != null)
-            {
-                pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);*/
-            IfFilters(true);
-            //}
+                preview.Image = originalBitmap.CopyToSquareCanvas(preview.Width);
+                preview.Image = ImageFilters.ApplyFilterMega(new Bitmap(preview.Image), 230, 110, c);
+            }
         }
     }
 }

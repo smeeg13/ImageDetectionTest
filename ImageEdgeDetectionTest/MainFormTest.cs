@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ImageEdgeDetectionTest
 {
-    class MainFormTests
+    class MainFormTest
     {
 
         [TestMethod]

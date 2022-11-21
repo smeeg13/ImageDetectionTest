@@ -254,7 +254,7 @@
             this.btnNoFilter.TabIndex = 51;
             this.btnNoFilter.Text = "No Filter";
             this.btnNoFilter.UseVisualStyleBackColor = true;
-            this.btnNoFilter.Click += new System.EventHandler(this.btnNoFilter_click);
+            this.btnNoFilter.Click += new System.EventHandler(this.btnNoFilter_Click);
             // 
             // MainForm
             // 
@@ -303,7 +303,7 @@
         private System.Windows.Forms.ListBox listBoxXFilter;
         private System.Windows.Forms.ListBox listBoxYFilter;
         private System.Windows.Forms.Label label4;
-        public System.Windows.Forms.PictureBox pictureBoxResult;
+        private System.Windows.Forms.PictureBox pictureBoxResult;
         private System.Windows.Forms.Label labelErrors;
         private System.Windows.Forms.Button btnPinkFilter;
         private System.Windows.Forms.Button btnNightFilter;

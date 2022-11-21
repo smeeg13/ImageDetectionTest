@@ -49,6 +49,7 @@
     <Compile Include="ExtBitmap.cs" />
     <Compile Include="General.cs" />
     <Compile Include="ImageFilters.cs" />
+    <Compile Include="ImageManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
