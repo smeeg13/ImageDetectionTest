@@ -13,11 +13,11 @@ namespace ImageEdgeDetectionTest
         public void TestGetMatrix()
         {
             ImageManager IM = new ImageManager();
-            IM.GetMatrix("Kirsch3x3Vertical");
+            double [,] matrix = IM.GetMatrix("Kirsch3x3Vertical");
             double[,] result = { {  5, -3, -3, },
                                   {  5,  0, -3, },
                                   {  5, -3, -3, }, };
-            Assert.AreEqual(IM.matrix, result);
+            Assert.AreEqual(matrix, result);
         }
     }
 }
