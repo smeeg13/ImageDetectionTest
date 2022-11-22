@@ -127,9 +127,9 @@ namespace ImageEdgeDetection
             }
         }
 
-        public double[,] GetMatrix(string filter)
+        public void GetMatrix(string filter)
         {
-            switch (filter)
+            /*switch (filter)
             {
                 case "Laplacian3x3":
                     return Matrix.Laplacian3x3;
@@ -157,8 +157,8 @@ namespace ImageEdgeDetection
                     return Matrix.Kirsch3x3Vertical;
                 default:
                     return Matrix.Laplacian3x3;
-            }
-            /*switch (filter)
+            }*/
+            switch (filter)
             {
                 case "Laplacian3x3":
                     matrix = Matrix.Laplacian3x3;
@@ -199,15 +199,15 @@ namespace ImageEdgeDetection
                 default:
                     matrix = Matrix.Laplacian3x3;
                     break;
-            }*/
+            }
         }
 
         public void Filter(string xfilter, string yfilter, PictureBox preview, int value, PictureBox result, Label error)
         {
-            //GetMatrix(xfilter);
-            double[,] xFilterMatrix = GetMatrix(xfilter);//matrix;
-            //GetMatrix(yfilter);
-            double[,] yFilterMatrix = GetMatrix(yfilter);//matrix;
+            GetMatrix(xfilter);
+            double[,] xFilterMatrix = /*GetMatrix(xfilter);*/matrix;
+            GetMatrix(yfilter);
+            double[,] yFilterMatrix = /*GetMatrix(yfilter);*/matrix;
 
             if (preview.Image.Size.Height > 0)
             {
