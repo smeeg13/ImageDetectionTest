@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using ImageEdgeDetection.Image.Testes;
+using ImageEdgeDetection;
 
 namespace ImageEdgeDetection
 {
@@ -54,7 +54,7 @@ namespace ImageEdgeDetection
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
-            IM.SaveImage(pictureBoxResult, pictureBoxPreview);
+            IM.SaveImage(pictureBoxResult.Image, pictureBoxPreview.Image);
             /*
             if (pictureBoxResult.Image == null)
             {
@@ -334,7 +334,7 @@ namespace ImageEdgeDetection
 
         private void btnNightFilter_Click(object sender, EventArgs e)
         {
-            IM.NightFilter(pictureBoxPreview);
+           pictureBoxPreview.Image = IM.NightFilter(pictureBoxPreview.Image, pictureBoxPreview.Width);
             /*if(pictureBoxPreview.Image != null)
             {
                 pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width); 
@@ -346,7 +346,7 @@ namespace ImageEdgeDetection
 
         private void btnPinkFilter_Click(object sender, EventArgs e)
         {
-            IM.PinkFilter(pictureBoxPreview);
+           pictureBoxPreview.Image = IM.PinkFilter(pictureBoxPreview.Image, pictureBoxPreview.Width);
             /*if (pictureBoxPreview.Image != null)
             {
                 Color c = Color.Pink;
@@ -361,7 +361,7 @@ namespace ImageEdgeDetection
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            IM.NormalPicture(pictureBoxPreview);
+            pictureBoxPreview.Image = IM.NormalPicture((Bitmap)pictureBoxPreview.Image, pictureBoxPreview.Width);
             IfFilters(false);
         }
 
@@ -377,6 +377,7 @@ namespace ImageEdgeDetection
 
         private void IfFilters(Boolean isFiltered)
         {
+            btnSaveNewImage.Visible = isFiltered;
             listBoxXFilter.Visible = isFiltered;
             listBoxYFilter.Visible = isFiltered;
             label4.Visible = isFiltered;
@@ -393,7 +394,7 @@ namespace ImageEdgeDetection
 
         private void btnNoFilter_Click(object sender, EventArgs e)
         {
-            IM.NoFilter(pictureBoxPreview);
+            pictureBoxPreview.Image = IM.NormalPicture((Bitmap)pictureBoxPreview.Image, pictureBoxPreview.Width);
             /*if (pictureBoxPreview.Image != null)
             {
                 pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);*/

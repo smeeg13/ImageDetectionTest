@@ -78,12 +78,13 @@
             // btnSaveNewImage
             // 
             this.btnSaveNewImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveNewImage.Location = new System.Drawing.Point(600, 946);
+            this.btnSaveNewImage.Location = new System.Drawing.Point(485, 725);
             this.btnSaveNewImage.Name = "btnSaveNewImage";
-            this.btnSaveNewImage.Size = new System.Drawing.Size(150, 46);
+            this.btnSaveNewImage.Size = new System.Drawing.Size(127, 46);
             this.btnSaveNewImage.TabIndex = 16;
             this.btnSaveNewImage.Text = "Save Image";
             this.btnSaveNewImage.UseVisualStyleBackColor = true;
+            this.btnSaveNewImage.BackColor = System.Drawing.Color.Gray;
             this.btnSaveNewImage.Click += new System.EventHandler(this.btnSaveNewImage_Click);
             // 
             // buttonApplyFilters
@@ -136,7 +137,7 @@
             this.listBoxXFilter.Location = new System.Drawing.Point(755, 672);
             this.listBoxXFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxXFilter.Name = "listBoxXFilter";
-            this.listBoxXFilter.Size = new System.Drawing.Size(178, 144);
+            this.listBoxXFilter.Size = new System.Drawing.Size(178, 124);
             this.listBoxXFilter.TabIndex = 22;
             this.listBoxXFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxXFilter_SelectedIndexChanged);
             // 
@@ -157,7 +158,7 @@
             this.listBoxYFilter.Location = new System.Drawing.Point(974, 672);
             this.listBoxYFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxYFilter.Name = "listBoxYFilter";
-            this.listBoxYFilter.Size = new System.Drawing.Size(178, 144);
+            this.listBoxYFilter.Size = new System.Drawing.Size(178, 124);
             this.listBoxYFilter.TabIndex = 21;
             this.listBoxYFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxYFilter_SelectedIndexChanged);
             // 
@@ -214,7 +215,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(638, 899);
+            this.label6.Location = new System.Drawing.Point(641, 860);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 20);
@@ -225,7 +226,7 @@
             // trackBarThreshold
             // 
             this.trackBarThreshold.LargeChange = 10;
-            this.trackBarThreshold.Location = new System.Drawing.Point(728, 885);
+            this.trackBarThreshold.Location = new System.Drawing.Point(728, 838);
             this.trackBarThreshold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.trackBarThreshold.Maximum = 255;
             this.trackBarThreshold.Name = "trackBarThreshold";
@@ -236,7 +237,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(500, 628);
+            this.btnBack.Location = new System.Drawing.Point(500, 672);
             this.btnBack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(112, 35);
@@ -259,7 +260,7 @@
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1356, 1036);
+            this.ClientSize = new System.Drawing.Size(1356, 899);
             this.Controls.Add(this.btnNoFilter);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label6);

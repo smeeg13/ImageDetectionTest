@@ -10,10 +10,11 @@ namespace ImageEdgeDetection
 {
     public static class ExtBitmap
     {
-        public static Bitmap CopyToSquareCanvas(this Bitmap sourceBitmap, int canvasWidthLenght)
+        public static Bitmap CopyToSquareCanvas(Bitmap sourceBitmap, int canvasWidthLenght)
         {
             float ratio = 1.0f;
-            int maxSide = sourceBitmap.Width > sourceBitmap.Height ?
+            if (!sourceBitmap.Size.IsEmpty){
+int maxSide = sourceBitmap.Width > sourceBitmap.Height ?
                           sourceBitmap.Width : sourceBitmap.Height;
 
             ratio = (float)maxSide / (float)canvasWidthLenght;
@@ -38,6 +39,12 @@ namespace ImageEdgeDetection
             }
 
             return bitmapResult;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
     }

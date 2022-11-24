@@ -11,15 +11,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\chantier.jpg" />
+    <None Remove="Resources\ChantierNight.jpg" />
+    <None Remove="Resources\ChantierPink.jpg" />
+    <None Remove="Ressources\chantier.jpg" />
+    <None Remove="Ressources\ChantierNight.jpg" />
+    <None Remove="Ressources\ChantierPink.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ImageEdgeDetection\ImageEdgeDetection.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\chantier.jpg" />
+    <Resource Include="Resources\ChantierNight.jpg" />
+    <Resource Include="Resources\ChantierPink.jpg" />
+    <Resource Include="Ressources\chantier.jpg" />
+    <Resource Include="Ressources\ChantierNight.jpg" />
+    <Resource Include="Ressources\ChantierPink.jpg" />
   </ItemGroup>
 
 </Project>

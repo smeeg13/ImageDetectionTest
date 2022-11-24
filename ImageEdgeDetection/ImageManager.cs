@@ -1,5 +1,4 @@
-﻿using ImageEdgeDetection.Image.Testes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -13,9 +12,10 @@ namespace ImageEdgeDetection
 {
     public class ImageManager
     {
-        private Bitmap originalBitmap = null;
-        private Bitmap previewBitmap = null;
-        private Bitmap resultBitmap = null;
+
+        public Bitmap originalBitmap = (Bitmap)System.Drawing.Image.FromFile(@"C:\chantier.jpg", true);
+        public Bitmap previewBitmap = null;
+        public Bitmap resultBitmap = null;
         public double[,] matrix { get; set; }
 
         public Bitmap openImage(int width)
@@ -30,21 +30,21 @@ namespace ImageEdgeDetection
                 originalBitmap = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
                 streamReader.Close();
 
-                return originalBitmap.CopyToSquareCanvas(width);
+                return ExtBitmap.CopyToSquareCanvas(originalBitmap,width);
             }
 
             return null;
         }
 
-        public void SaveImage(PictureBox result, PictureBox preview)
+        public void SaveImage(System.Drawing.Image resultImg, System.Drawing.Image previewImg)
         {
-            if (result.Image == null)
+            if (resultImg == null)
             {
-                resultBitmap = (Bitmap)preview.Image;
+                resultBitmap = (Bitmap)previewImg;
             }
             else
             {
-                resultBitmap = (Bitmap)preview.Image;
+                resultBitmap = (Bitmap)previewImg;
             }
 
             if (resultBitmap != null)
@@ -129,35 +129,6 @@ namespace ImageEdgeDetection
 
         public void GetMatrix(string filter)
         {
-            /*switch (filter)
-            {
-                case "Laplacian3x3":
-                    return Matrix.Laplacian3x3;
-                case "Laplacian5x5":
-                    return Matrix.Laplacian5x5;
-                case "LaplacianOfGaussian":
-                    return Matrix.LaplacianOfGaussian;
-                case "Gaussian3x3":
-                    return Matrix.Gaussian3x3;
-                case "Gaussian5x5Type1":
-                    return Matrix.Gaussian5x5Type1;
-                case "Gaussian5x5Type2":
-                    return Matrix.Gaussian5x5Type2;
-                case "Sobel3x3Horizontal":
-                    return Matrix.Sobel3x3Horizontal;
-                case "Sobel3x3Vertical":
-                    return Matrix.Sobel3x3Vertical;
-                case "Prewitt3x3Horizontal":
-                    return Matrix.Prewitt3x3Horizontal;
-                case "Prewitt3x3Vertical":
-                    return Matrix.Prewitt3x3Vertical;
-                case "Kirsch3x3Horizontal":
-                    return Matrix.Kirsch3x3Horizontal;
-                case "Kirsch3x3Vertical":
-                    return Matrix.Kirsch3x3Vertical;
-                default:
-                    return Matrix.Laplacian3x3;
-            }*/
             switch (filter)
             {
                 case "Laplacian3x3":
@@ -321,36 +292,53 @@ namespace ImageEdgeDetection
 
         }
 
-        public void NightFilter(PictureBox pictureBoxPreview)
+        public Bitmap NightFilter(System.Drawing.Image img, int width)
         {
-            if (pictureBoxPreview.Image != null)
+
+            if (img != null && width != 0)
             {
-                pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);
-                pictureBoxPreview.Image = ImageFilters.ApplyFilter(new Bitmap(pictureBoxPreview.Image), 1, 1, 1, 25);
+               Bitmap imgResized = ExtBitmap.CopyToSquareCanvas((Bitmap)img,width);
+                previewBitmap = ImageFilters.ApplyFilter(imgResized, 1, 1, 1, 25);
+
+            }else{
+                        previewBitmap = null;
             }
+            return previewBitmap;
+  
         }
 
-        public void NoFilter(PictureBox preview)
+        public Bitmap NormalPicture(Bitmap img, int width)
         {
-    
-            if(preview.Image != null)
-                NormalPicture(preview);
-            
+
+            if (img != null && width > 0)
+            {
+                Bitmap imgResized = ExtBitmap.CopyToSquareCanvas((Bitmap)img, width);
+                previewBitmap = imgResized;
+
+            }
+            else
+            {
+                previewBitmap = null;
+
+            }
+            return previewBitmap;
+
         }
 
-        public void NormalPicture(PictureBox preview)
+        public Bitmap PinkFilter(System.Drawing.Image img, int width)
         {
-            preview.Image = originalBitmap.CopyToSquareCanvas(preview.Width);
-        }
-
-        public void PinkFilter(PictureBox preview)
-        {
-            if (preview.Image != null)
+            if (img != null && width != 0)
             {
                 Color c = Color.Pink;
-                preview.Image = originalBitmap.CopyToSquareCanvas(preview.Width);
-                preview.Image = ImageFilters.ApplyFilterMega(new Bitmap(preview.Image), 230, 110, c);
+                Bitmap imgResized = ExtBitmap.CopyToSquareCanvas((Bitmap)img,width);
+                previewBitmap = ImageFilters.ApplyFilterMega(imgResized, 230, 110, c);
+              
             }
+            else {
+                previewBitmap = null;
+
+            }  
+            return previewBitmap;
         }
     }
 }
