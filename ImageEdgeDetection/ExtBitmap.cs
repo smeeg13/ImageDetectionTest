@@ -14,8 +14,8 @@ namespace ImageEdgeDetection
         {
             float ratio = 1.0f;
             if (!sourceBitmap.Size.IsEmpty){
-int maxSide = sourceBitmap.Width > sourceBitmap.Height ?
-                          sourceBitmap.Width : sourceBitmap.Height;
+            int maxSide = sourceBitmap.Width > sourceBitmap.Height ?
+                              sourceBitmap.Width : sourceBitmap.Height;
 
             ratio = (float)maxSide / (float)canvasWidthLenght;
 

@@ -8,11 +8,11 @@ namespace ImageEdgeDetection
 {
     public class ImageFilters
     {
-                //apply color filter at your own taste
+        //apply color filter at your own taste
         public static Bitmap ApplyFilter(Bitmap bmp, int alpha, int red, int blue, int green)
         {
 
-            if (!bmp.Size.IsEmpty)
+            if (bmp !=null)
             {
                 Bitmap temp = new Bitmap(bmp.Width, bmp.Height);
 
@@ -40,7 +40,7 @@ namespace ImageEdgeDetection
         //apply color filter to swap pixel colors
         public static Bitmap ApplyFilterMega(Bitmap bmp, int max, int min, Color co)
         {
-            if (!bmp.Size.IsEmpty)
+            if (bmp != null)
             {
                 Bitmap temp = new Bitmap(bmp.Width, bmp.Height);
                 for (int i = 0; i < bmp.Width; i++)

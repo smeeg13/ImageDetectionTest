@@ -11,7 +11,6 @@ namespace ImageEdgeDetectionTest
         [TestMethod]
         public void TestApplyFilterNoImage()
         {
-
             Bitmap result = ImageFilters.ApplyFilter(null, 1, 1, 1, 25);
 
             Bitmap expected = null;
@@ -21,8 +20,13 @@ namespace ImageEdgeDetectionTest
 
 
         [TestMethod]
-        public void TestApplyFilterMega()
+        public void TestApplyFilterMegaNoImage()
         {
+            Bitmap result = ImageFilters.ApplyFilterMega(null, 230, 110, Color.Pink);
+
+            Bitmap expected = null;
+
+            Assert.AreEqual(expected, result);
         }
     }
 }

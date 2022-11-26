@@ -77,14 +77,14 @@
             // 
             // btnSaveNewImage
             // 
+            this.btnSaveNewImage.BackColor = System.Drawing.Color.Gray;
             this.btnSaveNewImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveNewImage.Location = new System.Drawing.Point(485, 725);
             this.btnSaveNewImage.Name = "btnSaveNewImage";
             this.btnSaveNewImage.Size = new System.Drawing.Size(127, 46);
             this.btnSaveNewImage.TabIndex = 16;
             this.btnSaveNewImage.Text = "Save Image";
-            this.btnSaveNewImage.UseVisualStyleBackColor = true;
-            this.btnSaveNewImage.BackColor = System.Drawing.Color.Gray;
+            this.btnSaveNewImage.UseVisualStyleBackColor = false;
             this.btnSaveNewImage.Click += new System.EventHandler(this.btnSaveNewImage_Click);
             // 
             // buttonApplyFilters
@@ -104,7 +104,7 @@
             this.label2.Location = new System.Drawing.Point(969, 643);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 23;
             this.label2.Text = "Y Filter";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -115,7 +115,7 @@
             this.label1.Location = new System.Drawing.Point(755, 643);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 24;
             this.label1.Text = "X Filter";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -123,7 +123,6 @@
             // listBoxXFilter
             // 
             this.listBoxXFilter.FormattingEnabled = true;
-            this.listBoxXFilter.ItemHeight = 20;
             this.listBoxXFilter.Items.AddRange(new object[] {
             "",
             "Laplacian3x3",
@@ -137,14 +136,13 @@
             this.listBoxXFilter.Location = new System.Drawing.Point(755, 672);
             this.listBoxXFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxXFilter.Name = "listBoxXFilter";
-            this.listBoxXFilter.Size = new System.Drawing.Size(178, 124);
+            this.listBoxXFilter.Size = new System.Drawing.Size(178, 121);
             this.listBoxXFilter.TabIndex = 22;
             this.listBoxXFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxXFilter_SelectedIndexChanged);
             // 
             // listBoxYFilter
             // 
             this.listBoxYFilter.FormattingEnabled = true;
-            this.listBoxYFilter.ItemHeight = 20;
             this.listBoxYFilter.Items.AddRange(new object[] {
             "",
             "Laplacian3x3",
@@ -158,7 +156,7 @@
             this.listBoxYFilter.Location = new System.Drawing.Point(974, 672);
             this.listBoxYFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxYFilter.Name = "listBoxYFilter";
-            this.listBoxYFilter.Size = new System.Drawing.Size(178, 124);
+            this.listBoxYFilter.Size = new System.Drawing.Size(178, 121);
             this.listBoxYFilter.TabIndex = 21;
             this.listBoxYFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxYFilter_SelectedIndexChanged);
             // 
@@ -168,7 +166,7 @@
             this.label4.Location = new System.Drawing.Point(666, 12);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 20);
+            this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 27;
             this.label4.Text = "Result Image";
             // 
@@ -186,7 +184,7 @@
             this.labelErrors.AutoSize = true;
             this.labelErrors.Location = new System.Drawing.Point(957, 860);
             this.labelErrors.Name = "labelErrors";
-            this.labelErrors.Size = new System.Drawing.Size(0, 20);
+            this.labelErrors.Size = new System.Drawing.Size(0, 13);
             this.labelErrors.TabIndex = 28;
             this.labelErrors.Click += new System.EventHandler(this.label3_Click);
             // 
@@ -218,7 +216,7 @@
             this.label6.Location = new System.Drawing.Point(641, 860);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 20);
+            this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 49;
             this.label6.Text = "Threshold";
             this.label6.Click += new System.EventHandler(this.label6_Click);
@@ -230,7 +228,7 @@
             this.trackBarThreshold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.trackBarThreshold.Maximum = 255;
             this.trackBarThreshold.Name = "trackBarThreshold";
-            this.trackBarThreshold.Size = new System.Drawing.Size(615, 69);
+            this.trackBarThreshold.Size = new System.Drawing.Size(615, 45);
             this.trackBarThreshold.TabIndex = 48;
             this.trackBarThreshold.Value = 100;
             this.trackBarThreshold.Scroll += new System.EventHandler(this.trackBarThreshold_Scroll);

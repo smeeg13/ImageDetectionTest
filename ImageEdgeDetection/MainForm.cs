@@ -21,7 +21,10 @@ namespace ImageEdgeDetection
     public partial class MainForm : Form
     {
         private ImageManager IM = null;
-        
+        public Bitmap originalBitmap = null;
+        public Bitmap previewBitmap = null;
+        public Bitmap resultBitmap = null;
+
         public MainForm()
         {
             InitializeComponent();
@@ -32,9 +35,7 @@ namespace ImageEdgeDetection
 
         private void btnOpenOriginal_Click(object sender, EventArgs e)
         {
-            pictureBoxPreview.Image = IM.openImage(pictureBoxPreview.Width);
-
-            /*OpenFileDialog ofd = new OpenFileDialog();
+            OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select an image file.";
             ofd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
             ofd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
@@ -44,18 +45,17 @@ namespace ImageEdgeDetection
                 originalBitmap = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
                 streamReader.Close();
 
-                previewBitmap = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);
+                previewBitmap = ExtBitmap.CopyToSquareCanvas(originalBitmap,pictureBoxPreview.Width);
                 pictureBoxPreview.Image = previewBitmap;
 
                 IfFilters(false);
-            }*/
+            }
             IfFilters(false);
         }
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
-            IM.SaveImage(pictureBoxResult.Image, pictureBoxPreview.Image);
-            /*
+            
             if (pictureBoxResult.Image == null)
             {
                 resultBitmap = (Bitmap)pictureBoxPreview.Image;
@@ -93,7 +93,7 @@ namespace ImageEdgeDetection
 
                     resultBitmap = null;
                 }
-            }*/
+            }
         }
 
         private void listBoxYFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -118,54 +118,21 @@ namespace ImageEdgeDetection
 
         private void buttonApplyFilters_Click(object sender, EventArgs e)
         {
-            IM.applyXY(listBoxXFilter,listBoxYFilter,pictureBoxResult, pictureBoxPreview, Convert.ToInt32(trackBarThreshold.Value), labelErrors);
-            
-            /*if (listBoxXFilter.SelectedItem.ToString().Length > 0 && listBoxYFilter.SelectedItem.ToString().Length > 0)
+            if (listBoxXFilter.SelectedItem.ToString().Length > 0 && listBoxYFilter.SelectedItem.ToString().Length > 0)
             {
-                filter(listBoxXFilter.SelectedItem.ToString(), listBoxYFilter.SelectedItem.ToString());
-                ConvertToXYCoord(pictureBoxResult);
+                pictureBoxResult.Image = IM.Filter(listBoxXFilter.SelectedItem.ToString(), listBoxYFilter.SelectedItem.ToString(), new Bitmap(pictureBoxPreview.Image), pictureBoxPreview.Image.Size.Height, Convert.ToInt32(trackBarThreshold.Value));
+                if (pictureBoxResult.Image == null)
+                    labelErrors.Text = IM.messageError;
+                else
+                    labelErrors.Text = "";
             }
             else
             {
                 labelErrors.Text = "2 filters must be selected";
-            }*/
-        }
-
-        /*public void ConvertToXYCoord(PictureBox pictureBoxelem)
-        {
-            string coord = "";
-            int width = pictureBoxelem.Image.Width;
-            int height = pictureBoxelem.Image.Height;
-            System.Drawing.Size size = new System.Drawing.Size(width, height);
-            Bitmap bitmapIMG = new Bitmap(pictureBoxResult.Image, width, height);
-
-            List<ImageEdgeDetection.coord> coorArray = new List<ImageEdgeDetection.coord>();
-
-            int x = 0;
-            int y = 0;
-            double newX;
-            double newY;
-
-            for (x = 0; x < width; x++)
-            {
-                for (y = 0; y < height; y++)
-                {
-                    Color pixelColor = Color.FromArgb(bitmapIMG.GetPixel(x, y).ToArgb());
-                    if (pixelColor.Name != "ff000000" && pixelColor.Name != "0")
-                    {
-                        newX = Convert.ToDouble(x);
-                        newY = Convert.ToDouble(y);
-                        int angle = 110;
-
-                        //Rotate
-                        newX = newX * Math.Cos(angle) - newY * Math.Sin(angle);
-                        newY = newX * Math.Sin(angle) + newY * Math.Cos(angle);
-
-                        coord = coord + newX.ToString() + "," + newY.ToString() + "|";
-                    }
-                }
             }
         }
+
+        
 
         /*public double [,] getMatrix(string filter)
         {
@@ -334,7 +301,7 @@ namespace ImageEdgeDetection
 
         private void btnNightFilter_Click(object sender, EventArgs e)
         {
-           pictureBoxPreview.Image = IM.NightFilter(pictureBoxPreview.Image, pictureBoxPreview.Width);
+           pictureBoxPreview.Image = IM.NightFilter(originalBitmap, pictureBoxPreview.Width);
             /*if(pictureBoxPreview.Image != null)
             {
                 pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width); 
@@ -346,7 +313,7 @@ namespace ImageEdgeDetection
 
         private void btnPinkFilter_Click(object sender, EventArgs e)
         {
-           pictureBoxPreview.Image = IM.PinkFilter(pictureBoxPreview.Image, pictureBoxPreview.Width);
+           pictureBoxPreview.Image = IM.PinkFilter(originalBitmap, pictureBoxPreview.Width);
             /*if (pictureBoxPreview.Image != null)
             {
                 Color c = Color.Pink;
@@ -361,7 +328,7 @@ namespace ImageEdgeDetection
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            pictureBoxPreview.Image = IM.NormalPicture((Bitmap)pictureBoxPreview.Image, pictureBoxPreview.Width);
+            pictureBoxPreview.Image = IM.NormalPicture(originalBitmap, pictureBoxPreview.Width);
             IfFilters(false);
         }
 
@@ -394,7 +361,7 @@ namespace ImageEdgeDetection
 
         private void btnNoFilter_Click(object sender, EventArgs e)
         {
-            pictureBoxPreview.Image = IM.NormalPicture((Bitmap)pictureBoxPreview.Image, pictureBoxPreview.Width);
+            pictureBoxPreview.Image = IM.NormalPicture(originalBitmap, pictureBoxPreview.Width);
             /*if (pictureBoxPreview.Image != null)
             {
                 pictureBoxPreview.Image = originalBitmap.CopyToSquareCanvas(pictureBoxPreview.Width);*/
